@@ -42,23 +42,21 @@ const animateByLine = ms => {
     })
 }
 
-const animateByChart = ms => {
+const animateByChart = miliseg => {
     let delay = 0
     asciiHeart.forEach(line => {
-        line.split('').forEach((char, charIndex) => {
-            delay += ms * charIndex
+        line.split('').forEach((char) => {
             setTimeout(() => {
-                if (charIndex === line.length - 1) {
-                    process.stdout.write(char)
-                    process.stdout.write('\n')
-                }
-                else {
-                    process.stdout.write(char)
-                }
+                process.stdout.write(char)
             }, delay)
+            delay += miliseg
         })
-    })
+        setTimeout(() => {
+            process.stdout.write('\n')
+        }, delay)
+        delay += miliseg
+})
 }
 
-animateByChart(5);
+animateByChart(50);
 //animateByLine(100)
